@@ -1,0 +1,291 @@
+1. What is the value of y in binary format in the below snippet?
+reg [5:0] y;
+initial
+begin
+y= 'Ox2;
+end
+SOLUTION: y= 'Ox2; This is invalid . So, compilation error occurs.
+
+2. What is the value of the b in the below snippet?
+integer b;
+initial
+begin
+b= -‘d12/3;
+end
+SOLUTION: -4
+
+3. What value is passed across the port b in the below snippet?
+module test(output [32:0]b);
+real a=14.5;
+assign b = a;
+endmodule
+SOLUTION: assign b = a;
+          Let us see LHS and RHS .First RHS is real number (14.5).Now, LHS 'b'  is net/reg(vector).When we assign real to reg/net then fractional part is discarded.
+          b = 00000000000000000000000000001110
+ 
+4. Find the value of the variable t at 1ns & 20 ns respectively from the below snippet.
+time = t;
+initial begin
+#10 t= $time;
+#20 ;
+end
+SOLUTION: This code has syntax error in which "time = t;" is invalid 
+           If its time t;
+          Then the output is 1ns=x(unknown)
+                             20ns=10 
+
+5. Write an RTL snippet to initialize all the locations of an array of size:10x8 to 0 at 0ns. Depth= 10, Width = 8bits
+SOLUTION:
+module array_module;
+reg [7:0] my_array [0:9];
+initial begin
+integer i;
+  for (i = 0; i < 10; i = i + 1) begin
+       my_array[i] = 8'b0;
+  end
+end
+endmodule
+
+6. What will be the value of the parameter constant for the instance DUT in the top module from the below snippet?
+module test;
+parameter WIDTH=8;
+endmodule
+module top;
+test #(16) OUT ( ) ;
+endmodule
+SOLUTION:  The value of parameter is 16
+
+7. What is the bug in the following snippet?
+module test;
+parameter WIDTH=8;
+endmodule
+module top;
+test OUT ( ) ;
+initial
+defparam OUT.WIDTH=10;
+endmodule
+SOLUTION:  Bug-'defparam' cannot be used inside an 'initial' block; it must be used outside procedural blocks.
+
+8. What will be displayed in the console mode for the below snippet?
+reg[13*8:1]s;
+initial
+begin
+s = "hello world";
+$display("Value of s= %s",s[104:65]);
+end
+SOLUTION: Value of s= hello [Because in ASCII 1char=8bit.]
+
+9. What is the value of y in the below snippet?
+reg [2:0] a, b;
+reg y;
+initial
+begin
+a= 3'd5;
+b= 3'b111
+y = a&&b;
+end
+SOLUTION: y=1
+
+10. What is the value of x in the below snippet?
+reg [2:0] a, b;
+reg [2:0]x;
+initial
+begin
+a=3'd5;
+b=3’b111;
+x= a | b;
+end
+SOLUTION: x = 3'111
+
+11. What is the value of x in the below snippet?
+reg [2:0]a;
+reg [2:0]x;
+initial
+begin
+a = 3'd4;
+x = ^a;
+end 
+SOLUTION: 3'001  [4=100,,1^0^0= 1]
+
+12. Evaluate the value of x in the below snippet.
+reg [3:0]a;
+reg [1:0]x;
+initial
+begin
+a = 4'd10;
+X= (a>>1);
+end
+SOLUTION: binary value of 10= 1010,
+          a=1010,, a>>1 i.e 0101
+          now value of x is 2'b01
+
+13. Find the value of b in the below snippet.
+reg [3:0]a;
+reg [6:0]b;
+initial
+begin
+a=4'd10;
+b={a,1};
+end
+SOLUTION: b=7'0010101
+
+14. Which block executes in the below snippet and justify the reason:
+reg [3:0]a= 4'b110x;
+initial
+begin
+if (a==4'b1100)
+begin: B1
+end
+else
+begin: B2 end
+end
+SOLUTION: B2 executes because the value of a is 110x ,the if block executes only the statement is true otherwise else is executed
+
+15. Which block executes in the below snippet and justify the reason.
+reg [3:0]a= 4'b110x;
+initial
+begin
+if ( a !== 4'b1100)
+begin: B1
+end
+else
+begin: B2 end
+end
+SOLUTION: the block B1 executes ,because the value 110x is not exactly equal to 1100 .
+
+16. What is the value of y in the below expression and justify the reason.
+reg [3:0]a= 4'b110x;
+wire y = (a== 4'b1100)?1'b1:1'b0;
+SOLUTION: y= 1'b0, because if comapae the values 110x and 1100 the ans is 'x' .In conditional operator the true value is taken only when it is 1 otherwise it 0 whether it is 0 or x.
+
+17. What is the value of y in the below expression and justify the reason.
+reg [3:0]a= 4'b010x;
+wire y = (a== 4'b1100)?1'b1:1'b0;
+SOLUTION: y=1'b0
+
+18. What is the value of b in the below expression and justify the reason.
+reg [3:0]a= 4'b0100;
+reg [3:0]b;
+initial
+begin
+b = a+1'bx;
+end
+SOLUTION:b = 4'b0xxx
+             In arithmetic operations, if any operand contains X, the result bits affected become X.Adding an unknown bit causes the carry to be unknown, which propagates to all higher bits.
+             So the addition result becomes unknown except the LSB.
+
+19. Implementing various gates using multiplexer
+a. Implement AND, OR, NAND, NOR, XOR, XNOR using multiplexer.
+SOLUTION: mux
+          s--> select line, io--> op when s=0, i1--> op when s=1
+          y = ~s.i0 + s.i1
+a)AND gate 
+mux o/p = 1 only when A=1 and B=1
+S = A
+i0 = 0
+i1 = B
+
+b)OR gate 
+S = A
+i0 = B
+i1 = 1
+
+c)NAND gate
+S = A
+i0 = 1
+i1 = ~B
+
+d)NOR
+S = A
+i0 = ~B
+i1 = 0
+
+e)XOR
+S = A
+i0 = B
+i1 = ~B
+
+f)XNOR
+S = A
+i0 = ~B
+i1 = B
+
+20. Implement 4x1 Mux using continuous assignments, i.e. Data flow model.
+a. Assign Y = S1 ? (S0 ? i3 : i2) : (S0 ? i1 : i0);
+i. Do not code assign inside always
+SOLUTION:  
+module mux4to1(
+input wire S0, S1,       
+input wire i0, i1, i2, i3,  
+output wire Y            
+);
+assign Y = S1 ? (S0 ? i3 : i2) : (S0 ? i1 : i0);
+endmodule
+
+21. Consider the following Verilog code using dataflow modeling
+module Unknown (p,a,b,c);
+output p;
+input a,b,c;
+wire q,r;
+assign q=!((!a) && b && (!c));
+assign r= !(a && (!b) && (!c));
+and G1(p,q,r);
+endmodule
+If c = 0 the Boolean expression for p would be
+A. NAND operation between variables a and b
+B. NOR operation between variables a and b
+C. XOR operation between variables a and b
+D. XNOR operation between variables a and b
+SOLUTION:
+Step 1: Substitute c = 0
+!c = 1
+Then:
+q = !((!a) && b && 1) = !((!a) && b) = a + !b 
+r = !(a && (!b) && 1) = !(a && !b) = !a + b
+Step 2: p = q AND r
+p = q && r
+  = (a + !b) && (!a + b)
+Step 3:
+a	b	a+!b	!a+b	(a+!b)&&(!a+b)
+0	0	1	1	1
+0	1	0	1	0
+1	0	1	0	0
+1	1	1	1	1
+
+this shows that it performs XNOR operation between variables a and b.
+
+22. What will be the value of x after executing the code? Justify your answer.
+reg [3:0] x;
+initial begin
+x = 4'b0011;
+fork
+#5 x = x + 1;
+#10 x = x + 2;
+join
+end
+SOLUTION:
+x = 6 (4'b0110) [DECIMAL 6]..fork ... join executes statements in parallel.Delays are independent.Blocking assignments (=) update the variable at the delayed time.So the operations happen sequentially in simulation time according to the # delays
+
+23. What will be the final value of i and sum after the loop finishes executing?
+reg [3:0] sum;
+integer i;
+initial begin
+sum = 4'b0000;
+for (i = 0; i < 4; i = i + 1) begin
+sum = sum + i;
+end
+$display("i = %0d, sum = %b", i, sum);
+SOLUTION:
+i = 4
+sum = 4'b0110
+
+24. What value will be displayed for acc at the end of the code execution?
+reg [3:0] acc;
+initial begin
+acc = 4'b0001;
+while (acc < 4'b1000) begin
+acc = acc + 1;
+end
+$display("acc = %b", acc);
+end
+SOLUTION:acc = 1000
