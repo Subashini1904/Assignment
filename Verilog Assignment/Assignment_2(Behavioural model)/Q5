@@ -1,0 +1,23 @@
+5. Which hardware logic is inferred from the below snippet?
+always@(*) begin
+case( 1’b1 )
+a[3] : y =3;
+a[2] : y = 2;;
+a[1] : y = 1;
+a[0] : y = 0;
+encase
+end
+
+
+//SOLUTION//
+4 to 2 encoder.
+The code checks 4 input bits in priority order and outputs the 2-bit binary index of the highest asserted bit, which is exactly a 4-to-2 priority encoder.
+         a[3]  → highest priority
+         a[2]
+         a[1]
+         a[0]  → lowest priority
+a[3], a[2], a[1], a[0]  → 4 inputs,,To represent numbers 0–3, hardware needs 2 bits:
+0 → 00
+1 → 01
+2 → 10
+3 → 11
