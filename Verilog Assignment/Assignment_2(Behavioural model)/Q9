@@ -1,0 +1,16 @@
+9. Write RTL code for designing a D latch using a 2:1 mux.
+
+
+//SOLUTION//
+module d_latch_mux (
+input  wire D,
+input  wire EN,
+output reg  Q
+);
+always @(*) begin
+  if (EN)
+     Q = D;   
+  else
+     Q = Q;  
+end
+endmodule
