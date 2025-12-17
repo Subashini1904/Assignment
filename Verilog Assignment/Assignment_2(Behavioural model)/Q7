@@ -1,0 +1,10 @@
+7. Write Verilog code for generating an infinite clock signal with a 50% duty cycle having a time period of 10ns using a forever loop.
+
+//SOLUTION//
+module clock_gen;
+  reg clk;
+  initial begin
+    clk = 1'b0;
+    forever #5 clk = ~clk;   
+  end
+endmodule
