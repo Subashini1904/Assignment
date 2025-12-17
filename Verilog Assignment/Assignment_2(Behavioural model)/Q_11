@@ -1,0 +1,15 @@
+SOLUTION:
+
+module rtl_from_schematic (
+input  wire x1,
+input  wire x2,
+input  wire x3,
+input  wire clock,
+output reg  f,
+output reg  g
+);
+always @(posedge clock) begin
+    f <= x1 & x2;   
+    g <= x3 | f;    
+end
+endmodule
