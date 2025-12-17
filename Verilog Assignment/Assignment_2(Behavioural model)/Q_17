@@ -1,0 +1,18 @@
+17. What is the output of following code?
+int alpha, beta;
+initial begin
+alpha = 4; beta = 3;
+beta <= beta + alpha;
+alpha <= alpha + beta;
+alpha alpha 2;
+$display ("Alpha=%0d Beta=%0d", alpha, beta);
+end
+
+//SOLUTION//
+alpha alpha 2;
+This is syntactically wrong.
+It must be one of the following 
+alpha = alpha * 2;
+
+Final output 
+Alpha=8 Beta=3
