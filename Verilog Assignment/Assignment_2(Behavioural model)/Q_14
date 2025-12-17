@@ -1,0 +1,13 @@
+14. Initial value of a=1 and b=2, then what will be final value if
+
+always @ (posedge clock)
+a<=b;
+always @ (posedge clock)
+b<=a;
+
+
+//SOLUTION//
+         Initial: a = 1, b = 2
+         After 1st clock: a = 2, b = 1
+         After 2nd clock: a = 1, b = 2
+There is no final stable value; a and b keep toggling (swapping) on every clock edge
