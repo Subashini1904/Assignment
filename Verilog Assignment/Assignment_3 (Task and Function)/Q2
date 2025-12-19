@@ -1,0 +1,21 @@
+2. Write a Verilog code to perform the sum of two numbers using a function.
+
+//SOLUTION//
+module sum_using_function;
+reg  [7:0] a, b;
+reg  [7:0] result;
+function [7:0] add;
+    input [7:0] x, y;
+    begin
+        add = x + y;   
+    end
+endfunction
+initial begin
+    a = 10;
+    b = 20;
+    result = add(a, b);   
+    $display("Sum = %d", result);
+end
+endmodule
+
+
