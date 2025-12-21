@@ -1,0 +1,20 @@
+3. Write a Verilog code to perform the sum of two numbers using a task.
+SOLUTION:
+module sum_using_task;
+reg [7:0] a, b;
+reg [8:0] sum; 
+task add_two_numbers;
+    input [7:0] x;
+    input [7:0] y;
+    output [8:0] result;
+    begin
+        result = x + y;
+    end
+endtask
+initial begin
+    a = 8'd15;
+    b = 8'd20;
+    add_two_numbers(a, b, sum);
+    $display("a = %d, b = %d, sum = %d", a, b, sum);
+    end
+endmodule
