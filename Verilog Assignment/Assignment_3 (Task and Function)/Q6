@@ -1,0 +1,49 @@
+6. Write Verilog code that uses different tasks to perform arithmetic operations.
+module arithmetic_tasks;
+    integer a, b;
+    integer sum, diff, prod, quot;
+    task add;
+        input integer x, y;
+        output integer result;
+        begin
+            result = x + y;
+        end
+    endtask
+    task subtract;
+        input integer x, y;
+        output integer result;
+        begin
+            result = x - y;
+        end
+    endtask
+    task multiply;
+        input integer x, y;
+        output integer result;
+        begin
+            result = x * y;
+        end
+    endtask
+    task divide;
+        input integer x, y;
+        output integer result;
+        begin
+            if (y != 0)
+                result = x / y;
+            else
+                result = 0;   
+        end
+    endtask
+    initial begin
+        a = 20;
+        b = 5;
+        add(a, b, sum);
+        subtract(a, b, diff);
+        multiply(a, b, prod);
+        divide(a, b, quot);
+        $display("a = %0d, b = %0d", a, b);
+        $display("Sum        = %0d", sum);
+        $display("Difference = %0d", diff);
+        $display("Product    = %0d", prod);
+        $display("Quotient   = %0d", quot);
+    end
+
