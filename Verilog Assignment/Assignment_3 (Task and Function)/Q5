@@ -1,0 +1,33 @@
+5. Write a Verilog code to create two functions for multiplication and division.
+module mul_div_functions;
+    integer a, b;
+    integer mul_result, div_result;
+   
+    function integer multiply;
+        input integer x, y;
+        begin
+            multiply = x * y;
+        end
+    endfunction
+
+    function integer divide;
+        input integer x, y;
+        begin
+            if (y != 0)
+                divide = x / y;
+            else
+                divide = 0;   // Avoid divide-by-zero
+        end
+    endfunction
+
+    initial begin
+        a = 20;
+        b = 5;
+        mul_result = multiply(a, b);
+        div_result = divide(a, b);
+        $display("a = %0d, b = %0d", a, b);
+        $display("Multiplication result = %0d", mul_result);
+        $display("Division result = %0d", div_result);
+    end
+endmodule
+
