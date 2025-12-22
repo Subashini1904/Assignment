@@ -1,0 +1,24 @@
+4. Write a Verilog code to generate 20 odd or even values using a function.
+module odd_even_generator;
+    integer i;
+    integer result;
+    reg sel;   
+    function integer gen_odd_even;
+        input integer index;
+        input reg select;
+        begin
+            if (select == 0)
+                gen_odd_even = index * 2;      
+            else
+                gen_odd_even = (index * 2) + 1; 
+        end
+    endfunction
+    initial begin
+        sel = 0;
+        $display("Generating 20 %s numbers:", sel ? "Odd" : "Even");
+        for (i = 0; i < 20; i = i + 1) begin
+            result = gen_odd_even(i, sel);
+            $display("Value %0d = %0d", i, result);
+        end
+    end
+endmodule
