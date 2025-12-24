@@ -1,0 +1,46 @@
+10. Write Verilog code to perform arithmetic operations using function.
+module arithmetic_using_functions;
+    integer a, b;
+    integer sum, diff, prod, quot;
+    function integer add;
+        input integer x, y;
+        begin
+            add = x + y;
+        end
+    endfunction
+    function integer subtract;
+        input integer x, y;
+        begin
+            subtract = x - y;
+        end
+    endfunction
+    function integer multiply;
+        input integer x, y;
+        begin
+            multiply = x * y;
+        end
+    endfunction
+    function integer divide;
+        input integer x, y;
+        begin
+            if (y != 0)
+                divide = x / y;
+            else
+                divide = 0;
+        end
+    endfunction
+    initial begin
+        a = 20;
+        b = 5;
+        sum  = add(a, b);
+        diff = subtract(a, b);
+        prod = multiply(a, b);
+        quot = divide(a, b);
+
+        $display("a = %0d, b = %0d", a, b);
+        $display("Sum        = %0d", sum);
+        $display("Difference = %0d", diff);
+        $display("Product    = %0d", prod);
+        $display("Quotient   = %0d", quot);
+    end
+endmodule
