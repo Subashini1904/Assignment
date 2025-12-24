@@ -1,0 +1,26 @@
+9. Write Verilog code where a task can call both a task and a function.
+module task_call_demo;
+    integer result;
+    function integer add;
+        input integer a, b;
+        begin
+            add = a + b;
+        end
+    endfunction
+    task display_value;
+        input integer val;
+        begin
+            $display("Time=%0t Displayed value = %0d", $time, val);
+        end
+    endtask
+    task main_task;
+        integer sum;
+        begin
+            sum = add(10, 20);
+            display_value(sum);
+        end
+    endtask
+    initial begin
+        main_task;
+    end
+endmodule
