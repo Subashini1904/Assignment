@@ -13,7 +13,6 @@ module task_demo;
         end
     endtask
 
-    // -------------------------------
     // AUTOMATIC TASK
     // -------------------------------
     task automatic auto_task;
