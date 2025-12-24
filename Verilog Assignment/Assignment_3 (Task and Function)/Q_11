@@ -1,0 +1,19 @@
+11. Write Verilog code to shift a number right using a task.
+module shift_right_using_task;
+    reg  [7:0] data_in;
+    reg  [7:0] data_out;
+    task shift_right;
+        input  [7:0] in;
+        output [7:0] out;
+        begin
+            out = in >> 1;   
+        end
+    endtask
+    initial begin
+        data_in = 8'b10110110;
+        shift_right(data_in, data_out);
+
+        $display("Input  = %b", data_in);
+        $display("Output = %b", data_out);
+    end
+endmodule
