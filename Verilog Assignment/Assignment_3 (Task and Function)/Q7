@@ -1,0 +1,17 @@
+7. Write a Verilog function to shift the input data 1 bit to the right.
+module shift_right;
+    reg [7:0] data;
+    reg [7:0] out;
+    function [7:0] shift_right_1;
+        input [7:0] data_in;
+        begin
+            shift_right_1 = data_in >> 1;
+        end
+    endfunction
+
+    initial begin
+        data = 8'b10010010;
+        out  = shift_right_1(data);
+        $display("Input = %b, Output = %b", data, out);
+    end
+endmodule
