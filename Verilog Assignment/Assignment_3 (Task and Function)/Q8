@@ -1,0 +1,42 @@
+8. Write Verilog code to demonstrate both automatic and non-automatic tasks.
+module task_demo;
+
+    // NON-AUTOMATIC TASK (default)
+    // -------------------------------
+    task non_auto_task;
+        input integer val;
+        integer temp;   
+        begin
+            temp = val;
+            #5;
+            $display("Time=%0t NON-AUTO: val=%0d temp=%0d", $time, val, temp);
+        end
+    endtask
+
+    // -------------------------------
+    // AUTOMATIC TASK
+    // -------------------------------
+    task automatic auto_task;
+        input integer val;
+        integer temp;   
+        begin
+            temp = val;
+            #5;
+            $display("Time=%0t AUTO:     val=%0d temp=%0d", $time, val, temp);
+        end
+    endtask
+
+    initial begin
+        $display(" Non-automatic task calls ");
+        fork
+            non_auto_task(10);
+            non_auto_task(20);
+        join
+        #10;
+        $display(" Automatic task calls ");
+        fork
+            auto_task(10);
+            auto_task(20);
+        join
+    end
+endmodule
